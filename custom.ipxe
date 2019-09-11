@@ -10,6 +10,10 @@ item --gap Proxmox
 item proxmox_6 ${space} ProxmoxV6
 item proxmox_5 ${space} ProxmoxV5
 
+item --gap Windows
+item windows_10 ${space} Windows10
+item windows_7 ${space} Windows7
+
 choose proxmox_choice || goto proxmox_exit
 echo ${cls}
 goto ${proxmox_choice}
@@ -24,6 +28,17 @@ boot || goto proxmox_exit
 kernel http://boot.punksky.com/proxmox/5/linux26 vga=791 video=vesafb:ywrap,mtrr ramdisk_size=16777216 rw quiet linux ext4 maxroot=15 splash=verbose
 initrd http://boot.punksky.com/proxmox/5/initrd.iso.img initrd.iso.img
 boot || goto proxmox_exit
+
+:windows_10
+set win 10
+goto windows
+
+:windows
+kernel http://${boot_domain}/wimboot
+initrd http://boot.punksky.com/windows/${win}/bootmgr bootmgr
+initrd http://boot.punksky.com/windows/${win}/boot/bcd bcd
+initrd http://boot.punksky.com/windows/${win}/boot/boot.sdi boot.sdi
+initrd http://boot.punksky.com/windows/${win}/sources/boot.wim boot.wim
 
 :proxmox_exit
 clear menu
