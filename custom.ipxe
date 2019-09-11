@@ -1,9 +1,32 @@
 #!ipxe
 ###
-### netboot.xyz-custom menu
+### netboot.xyz-proxmox menu
 ###
 
-:start
-kernel https://boot.netboot.xyz/memdisk iso raw
-initrd http://www.proxmox.com/en/downloads?task=callelement&format=raw&item_id=452&element=f85c494b-2b32-4109-b8c1-083cca2b7db6&method=download&args[0]=973736c35777b6ca660b4af730ab2e95
-boot
+:proxmox
+clear proxmox_choice
+menu Proxmox
+item --gap Proxmox
+item proxmox_6 ${space} ProxmoxV6(not working)
+item proxmox_5 ${space} ProxmoxV5
+
+choose proxmox_choice || goto proxmox_exit
+echo ${cls}
+goto ${proxmox_choice}
+goto proxmox_exit
+
+:proxmox_6
+kernel http://boot.punksky.com/proxmox/6/linux26
+initrd http://boot.punksky.com/proxmox/6/initrd.iso.img
+imgargs vga=791 video=vesafb:ywrap,mtrr ramdisk_size=16777216 rw quiet splash=silent
+boot || goto proxmox_exit
+
+:proxmox_5
+kernel http://boot.punksky.com/proxmox/5/linux26
+initrd http://boot.punksky.com/proxmox/5/initrd.iso.img
+imgargs vga=791 video=vesafb:ywrap,mtrr ramdisk_size=16777216 rw quiet splash=silent
+boot || goto proxmox_exit
+
+:proxmox_exit
+clear menu
+exit 0
