@@ -18,13 +18,13 @@ goto proxmox_exit
 :proxmox_6
 kernel http://boot.punksky.com/proxmox/6/linux26
 initrd http://boot.punksky.com/proxmox/6/initrd.iso.img
-imgargs linux26 vga=791 video=vesafb:ywrap,mtrr ramdisk_size=16777216 rw quiet splash=silent
+imgargs vga=791 video=vesafb:ywrap,mtrr ramdisk_size=16777216 rw quiet linux ext4 maxroot=15 splash=verbose
 boot || goto proxmox_exit
 
 :proxmox_5
 kernel http://boot.punksky.com/proxmox/5/linux26
 initrd http://boot.punksky.com/proxmox/5/initrd.iso.img
-imgargs linux26 vga=791 video=vesafb:ywrap,mtrr ramdisk_size=16777216 rw quiet splash=silent
+imgargs vga=791 video=vesafb:ywrap,mtrr ramdisk_size=16777216 rw quiet linux ext4 maxroot=15 splash=verbose
 boot || goto proxmox_exit
 
 :proxmox_exit
