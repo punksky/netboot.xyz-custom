@@ -7,7 +7,7 @@
 clear proxmox_choice
 menu Proxmox
 item --gap Proxmox
-item proxmox_6 ${space} ProxmoxV6(not working)
+item proxmox_6 ${space} ProxmoxV6
 item proxmox_5 ${space} ProxmoxV5
 
 choose proxmox_choice || goto proxmox_exit
