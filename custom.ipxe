@@ -4,9 +4,6 @@
 ###
 
 :start
-echo Hello world!
-sleep 10
-goto custom_exit
-
-:custom_exit
-exit 0
+kernel https://boot.netboot.xyz/memdisk iso raw
+initrd http://www.proxmox.com/en/downloads?task=callelement&format=raw&item_id=452&element=f85c494b-2b32-4109-b8c1-083cca2b7db6&method=download&args[0]=973736c35777b6ca660b4af730ab2e95
+boot
